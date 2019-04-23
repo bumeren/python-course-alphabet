@@ -1,5 +1,6 @@
 from typing import List, Dict, Union, Generator
-
+import random
+import string
 # We will work with such dicts
 ST = Dict[str, Union[str, int]]
 # And we will put this dicts in list
@@ -7,107 +8,57 @@ DT = List[ST]
 
 
 def task_1_fix_names_start_letter(data: DT) -> DT:
-    """
-    Make all `names` field in list of students to start from upper letter
-
-    Examples:
-        fix_names_start_letters([{'name': 'Alex', 'age': 26}, {'name': 'denys', 'age': 89}])
-        >>> [{'name': 'Alex', 'age': 26}, {'name': 'Denys', 'age': 89}]
-    """
-    pass
+   for elem in data:
+        for k, v in elem.items():
+            if k == 'name':
+               elem[k] = v.capitalize()
+   return data
 
 
 def task_2_remove_dict_fields(data: DT, redundant_keys: List[str]) -> DT:
-    """given_data
-    Remove from dictionaries given key value
-
-    Examples:
-       remove_dict_field([{'name': 'Alex', 'age': 26}, {'name': 'denys', 'age': 89}], 'age')
-        >>> [{'name': 'Alex'}, {'name': 'denys'}]
-    """
-    pass
+    for elem in data:
+        for element in redundant_keys:
+            del elem[element]
+    return data
 
 
 def task_3_find_item_via_value(data: DT, value) -> DT:
-    """
-    Find and return all items that has @searching value in any key
-    Examples:
-        find_item_via_value([{'name': 'Alex', 'age': 26}, {'name': 'denys', 'age': 89}], 26)
-        >>> [{'name': 'Alex', 'age': 26}]
-    """
-    pass
+    for elem in data:
+        for keys, values in elem.items():
+            if values == value:
+                return elem
 
 
 def task_4_min_value_integers(data: List[int]) -> int:
-    """
-    Find and return minimum value from list
-    """
-    pass
-
+    return min([int(elem) for elem in data])
 
 def task_5_min_value_strings(data: List[Union[str, int]]) -> str:
-    """
-    Find the longest string
-    """
-    pass
+    return min(data, key=lambda x: len(x))
 
 
 def task_6_min_value_list_of_dicts(data: DT, key: str) -> ST:
-    """
-    Find minimum value by given key
-    Returns:
-
-    """
-    pass
-
+    max_list = []
+    for elem in data:
+        for keys, values in elem.items():
+            if keys == key:
+                max_list.append(values)
+    return max(max_list)
 
 def task_7_max_value_list_of_lists(data: List[List[int]]) -> int:
-    """
-    Find max value from list of lists
-    """
-    pass
+    return max([int(elements) for elem in data for elements in elem])
 
 
 def task_8_sum_of_ints(data: List[int]) -> int:
-    """
-    Find sum of all items in given list
-    """
-    pass
+    return sum(elem for elem in data)
 
 
 def task_9_sum_characters_positions(text: str) -> int:
-    """
-    Please read first about ascii table.
-    https://python-reference.readthedocs.io/en/latest/docs/str/ASCII.html
-    You need to calculate sum of decimal value of each symbol in text
-
-    Examples:
-        task_9_sum_characters_positions("A")
-        >>> 65
-        task_9_sum_characters_positions("hello")
-        >>> 532
-
-    """
-    pass
+    return sum(ord(elem) for elem in text)
 
 
 def task_10_generator_of_simple_numbers() -> Generator[int, None, None]:
-    """
-    Return generator of simple numbers
-    Stop then iteration if returned value is more than 200
-    Examples:
-        a = task_10_generator_of_simple_numbers()
-        next(a)
-        >>> 2
-        next(a)
-        >>> 3
-    """
-    pass
+    return (elem for elem in range(200))
 
 
 def task_11_create_list_of_random_characters() -> List[str]:
-    """
-    Create list of 20 elements where each element is random letter from latin alphabet
-
-    """
-    pass
+    return [random.choice(string.ascii_letters) for _ in range(20)]
